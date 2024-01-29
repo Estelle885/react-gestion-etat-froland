@@ -13,12 +13,17 @@ function App() {
     const newId = crypto.randomUUID();
     const tDo = [...todos, { id: newId, name: text }];
     setTodos(tDo);
-    setText("");
+    setText('');
   };
 
   const handleChange = function (e) {
     const val = e.target.value;
     setText(val);
+  };
+
+  const handleRemove = (oneElement) => {
+    const updatedList = todos.filter((element) => element.id !== oneElement.id);
+    setTodos(updatedList);
   };
 
   return (
@@ -29,6 +34,7 @@ function App() {
           <li key={toDo.id}>
             <span>{toDo.id}</span>
             <span>{toDo.name}</span>
+            <button onClick={() => handleRemove(toDo)}>Remove</button>
           </li>
         ))}
       </ul>
